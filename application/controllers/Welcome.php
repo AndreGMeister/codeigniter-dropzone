@@ -29,11 +29,11 @@ class Welcome extends CI_Controller {
 	      if (!empty($_FILES['file']['name'])) {
 	          $filesCount = count($_FILES['file']['name']);
 	          for ($i = 0; $i < $filesCount; $i++) {
-	              $_FILES['userFile']['name'] = str_replace(",","_",$_FILES['file']['name'][$i]);
-	              $_FILES['userFile']['type'] = $_FILES['file']['type'][$i];
-	              $_FILES['userFile']['tmp_name'] = $_FILES['file']['tmp_name'][$i];
-	              $_FILES['userFile']['error'] = $_FILES['file']['error'][$i];
-	              $_FILES['userFile']['size'] = $_FILES['file']['size'][$i];
+	              $_FILES['uploadFile']['name'] = str_replace(",","_",$_FILES['file']['name'][$i]);
+	              $_FILES['uploadFile']['type'] = $_FILES['file']['type'][$i];
+	              $_FILES['uploadFile']['tmp_name'] = $_FILES['file']['tmp_name'][$i];
+	              $_FILES['uploadFile']['error'] = $_FILES['file']['error'][$i];
+	              $_FILES['uploadFile']['size'] = $_FILES['file']['size'][$i];
 	              //Directory where files will be uploaded
 	              $uploadPath = 'uploads/';
 	              $config['upload_path'] = $uploadPath;
@@ -41,9 +41,9 @@ class Welcome extends CI_Controller {
 	              $config['allowed_types'] = 'jpg|png|pdf|doc|docx|xls|xlsx|ppt|pptx|txt|rtf';
 	              $this->load->library('upload', $config);
 	              $this->upload->initialize($config);
-	              if ($this->upload->do_upload('userFile')) {
+	              if ($this->upload->do_upload('uploadFile')) {
 	                  $fileData = $this->upload->data();
-	                  echo $uploadData[$i]['file_name'] = $fileData['file_name'];
+	                  $uploadData[$i]['file_name'] = $fileData['file_name'];
 	              }
 	          }
 	          if (!empty($uploadData)) {
